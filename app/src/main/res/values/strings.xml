@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">justDriveQ</string>
+    <string name="already_registered">Already have an account? Login here</string>
+    <string name="not_registered">Create a new account</string>
+    <string name="welcome_message">Welcome to justDriveQ</string>
+    <string name="register">REGISTER</string>
+    <string name="login">LOGIN</string>
+    <string name="password">Password</string>
+    <string name="email">E-mail</string>
+    <string name="confirmpassword">Confirm Password</string>
+    <string name="hellouser">Welcome to justDriveQ!</string>
+    <string name="startquestionnaire">Start new questionnaire</string>
+    <string name="viewleaderboard">View leaderboard</string>
+    <string name="howtoplay">How to play?</string>
+    <string name="leaderboardText">Leaderboard</string>
+    <string name="questionnumber">Question number text</string>
+    <string name="question">The question is bla bla bla</string>
+    <string name="answer">Answer is bla bla bla</string>
+    <string name="timeleft">Time left bla bla bla</string>
+    <string name="nextquestion">Next Question</string>
+    <string name="gotohomepage">Go back to homescreen</string>
+    <string name="questionnaireresult">Result is bla bla bla</string>
+    <string name="correctanswers">Correct answers</string>
+    <string name="wronganswers">Wrong answers</string>
+    <string name="finishmessage">Congratulations! Questionnaire completed!</string>
+    <string name="howtomessage">
+        In order to play this game you are going to use the Gyroscope sensor from your mobile phone. You need to answer correctly to the driving school questions. In order to select the answer to the question you need to incline the phone accordingly. To select the first answer, incline the phone towards yourself. To select the second answer, incline the phone towards your left. In order to select the third answer, incline the phone to your right. In order to select the fourth answer, incline the phone forward. Good luck!
+    </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logout">LOGOUT</string>
+    <string name="title_activity_sensor">SensorActivity</string>
+</resources>

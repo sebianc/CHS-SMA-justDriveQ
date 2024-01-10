@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "410459845239",
+    "project_id": "justdriveq-102cf",
+    "storage_bucket": "justdriveq-102cf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410459845239:android:8fd30d9656dffbffc84c72",
+        "android_client_info": {
+          "package_name": "com.example.justdriveq"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG4-ZKF8VBt20SottFeCO2Od11jwxGzAA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

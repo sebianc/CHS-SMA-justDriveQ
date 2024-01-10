@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/coffeepot"
+    tools:context=".app.questionnaire.QuestionnaireFragment">
+
+    <TextView
+        android:id="@+id/questionNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:fontFamily="sans-serif-black"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/questionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif-black"
+        android:padding="10dp"
+        android:textColor="@color/brown"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionNumber" />
+
+    <Button
+        android:id="@+id/firstOptionButton"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/black"
+        android:fontFamily="sans-serif"
+        android:padding="7dp"
+        android:text="@string/answer"
+        android:visibility="invisible"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#FFFFFF"
+        app:cornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionText" />
+
+    <Button
+        android:id="@+id/secondOptionButton"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="1dp"
+        android:backgroundTint="@color/black"
+        android:fontFamily="sans-serif"
+        android:padding="7dp"
+        android:text="@string/answer"
+        android:visibility="invisible"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#FFFFFF"
+        app:cornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firstOptionButton" />
+
+    <Button
+        android:id="@+id/thirdOptionButton"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="1dp"
+        android:backgroundTint="@color/black"
+        android:fontFamily="sans-serif"
+        android:padding="7dp"
+        android:text="@string/answer"
+        android:visibility="invisible"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#FFFFFF"
+        app:cornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/secondOptionButton" />
+
+    <Button
+        android:id="@+id/forthOptionButton"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="1dp"
+        android:backgroundTint="@color/black"
+        android:fontFamily="sans-serif"
+        android:padding="7dp"
+        android:text="@string/answer"
+        android:visibility="invisible"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#FFFFFF"
+        app:cornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thirdOptionButton" />
+
+    <Button
+        android:id="@+id/nextQuestionButton"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="28dp"
+        android:backgroundTint="@color/brown"
+        android:fontFamily="sans-serif"
+        android:padding="7dp"
+        android:text="@string/nextquestion"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#FFFFFF"
+        android:visibility="invisible"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
