@@ -34,7 +34,9 @@ public class LeaderboardListAdapter extends RecyclerView.Adapter<LeaderboardList
     public void onBindViewHolder(@NonNull LeaderboardListViewHolder holder, int position) {
         String model = resultsViewModelLeaderboardList.get(position);
         String[] splitModel = model.split("@");
-        holder.clasamentText.setText(splitModel[0]);
+        String[] splitOneMoreTime = splitModel[1].split(" ");
+        String finalString = splitModel[0] + " " + splitOneMoreTime[1] + " " + splitOneMoreTime[2];
+        holder.clasamentText.setText(finalString);
     }
 
     @Override

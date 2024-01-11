@@ -24,10 +24,10 @@ import com.example.justdriveq.app.questionnaire.viewmodel.ResultsViewModelLeader
 import com.example.justdriveq.models.Result;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.*;
 
 public class LeaderboardFragment extends Fragment {
 
@@ -72,14 +72,25 @@ public class LeaderboardFragment extends Fragment {
             @Override
             public void onChanged(List<Result> results) {
                 //Log.d("mesaj frumos", "mesaj tare");
-                Map<String, Integer> resultsHashMap = new HashMap<>();
-                for(Result i : results){
-                    resultsHashMap.put(i.getEmail(), resultsHashMap.getOrDefault(i.getEmail(), 0) + 1);
-                }
-                List<String> leaderboardList = new ArrayList<>(resultsHashMap.keySet());
-                leaderboardList.sort(Comparator.comparingInt(resultsHashMap::get).reversed());
 
-                leaderboardListAdapter.setResultsViewModelLeaderboardList(leaderboardList);
+                List<String> leaderboardList = new ArrayList<>();
+
+                for(int i =0 ; i<results.size(); i++){
+                    leaderboardList.add(results.get(i).getEmail());
+                }
+
+                Map<String, Integer> leaderboardListHashMap = new HashMap<>();
+                for(String member : leaderboardList){
+                    leaderboardListHashMap.put(member, leaderboardListHashMap.getOrDefault(member, 0) + 1);
+                }
+
+                leaderboardList.sort(Comparator.comparingInt(leaderboardListHashMap::get).reversed());
+
+                Set<String> removeDuplicates = new LinkedHashSet<>(leaderboardList);
+                List<String> finalLeaderboard = new ArrayList<>(removeDuplicates);
+                finalLeaderboard.replaceAll(s -> s + " - " + leaderboardListHashMap.get(s));
+
+                leaderboardListAdapter.setResultsViewModelLeaderboardList(finalLeaderboard);
                 leaderboardListAdapter.notifyDataSetChanged();
             }
         });

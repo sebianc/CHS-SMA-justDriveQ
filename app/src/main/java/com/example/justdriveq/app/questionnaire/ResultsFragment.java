@@ -64,7 +64,7 @@ public class ResultsFragment extends Fragment {
             @Override
             public void onChanged(Integer integer) {
                 String resultString;
-                if(integer > 5){
+                if(integer > 24){
                     resultString = "You passed";
                     Result result = new Result(authViewModel.getUser().getEmail(), true);
                     resultsViewModelLeaderboard.addResultToFirebase(result);
@@ -72,7 +72,7 @@ public class ResultsFragment extends Fragment {
                     resultString = "You failed";
                 }
                 String correctString = "Correct answers: " + integer;
-                String wrongString = authViewModel.getUser().getEmail();
+                String wrongString = "Wrong answers: " + (26 - integer);
                 resultText.setText(resultString);
                 correctanswersText.setText(correctString);
                 wronganswersText.setText(wrongString);
