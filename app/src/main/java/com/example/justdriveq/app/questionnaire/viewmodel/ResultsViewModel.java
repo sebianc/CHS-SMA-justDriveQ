@@ -3,18 +3,20 @@ package com.example.justdriveq.app.questionnaire.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.List;
+
 public class ResultsViewModel extends ViewModel {
-    private MutableLiveData<Integer> counter;
+    private MutableLiveData<List<Integer>> counter;
 
     public ResultsViewModel(){
         this.counter = new MutableLiveData<>();
     }
 
-    public MutableLiveData<Integer> getCounter() {
+    public MutableLiveData<List<Integer>> getCounter() {
         return counter;
     }
 
-    public void setCounter(int counter) {
-        this.counter.postValue(counter);
+    public void setCounter(List<Integer> counter) {
+        this.counter.setValue(counter);
     }
 }

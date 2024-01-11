@@ -49,6 +49,7 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
     private int currentQuestionNumber;
     private String currentQuestionAnswer;
     private int correctAnswerCount = 0;
+    private int wrongAnswerCount = 0;
     private List<Integer> alreadyGeneratedNumbers = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -157,6 +158,7 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
                 correctAnswerCount++;
             } else {
                 button.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.darkred));
+                wrongAnswerCount++;
             }
             ansSelected = TRUE;
             nextQuestionButton.setEnabled(TRUE);
@@ -164,7 +166,10 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
 
     }
     private void switchToLastQuestionButton(){
-        resultsViewModel.setCounter(correctAnswerCount);
+        List<Integer> counter = new ArrayList<>();
+        counter.add(correctAnswerCount);
+        counter.add(wrongAnswerCount);
+        resultsViewModel.setCounter(counter);
         navController.navigate(R.id.action_questionnaireFragment_to_resultsFragment);
     }
     private void generateNewAnswers(){
@@ -208,6 +213,13 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
             verifyAnswer(forthOptionButton);
         }
         else if(currentButtonId == R.id.nextQuestionButton){
+            if(wrongAnswerCount > 4){
+                List<Integer> counter = new ArrayList<>();
+                counter.add(correctAnswerCount);
+                counter.add(wrongAnswerCount);
+                resultsViewModel.setCounter(counter);
+                navController.navigate(R.id.action_questionnaireFragment_to_resultsFragment);
+            }
             if(currentQuestionNumber == 26){
                 switchToLastQuestionButton();
             } else if(currentQuestionNumber < 26){

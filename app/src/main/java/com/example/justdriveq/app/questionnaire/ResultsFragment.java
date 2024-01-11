@@ -23,6 +23,8 @@ import com.example.justdriveq.data.firebase.viewmodel.AuthViewModel;
 import com.example.justdriveq.models.Result;
 import com.google.rpc.context.AttributeContext;
 
+import java.util.List;
+
 public class ResultsFragment extends Fragment {
 
     private ResultsViewModel resultsViewModel;
@@ -60,19 +62,19 @@ public class ResultsFragment extends Fragment {
         wronganswersText = view.findViewById(R.id.wronganswersText);
         goHomeButton = view.findViewById(R.id.goHomeButton);
 
-        resultsViewModel.getCounter().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+        resultsViewModel.getCounter().observe(getViewLifecycleOwner(), new Observer<List<Integer>>() {
             @Override
-            public void onChanged(Integer integer) {
+            public void onChanged(List<Integer> integers) {
                 String resultString;
-                if(integer > 24){
+                if(integers.get(0) > 24){
                     resultString = "You passed";
                     Result result = new Result(authViewModel.getUser().getEmail(), true);
                     resultsViewModelLeaderboard.addResultToFirebase(result);
                 } else {
                     resultString = "You failed";
                 }
-                String correctString = "Correct answers: " + integer;
-                String wrongString = "Wrong answers: " + (26 - integer);
+                String correctString = "Correct answers: " + integers.get(0);
+                String wrongString = "Wrong answers: " + integers.get(1);
                 resultText.setText(resultString);
                 correctanswersText.setText(correctString);
                 wronganswersText.setText(wrongString);
