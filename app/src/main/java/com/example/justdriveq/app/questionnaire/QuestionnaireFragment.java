@@ -28,6 +28,7 @@ import com.example.justdriveq.app.questionnaire.viewmodel.QuestionnaireViewModel
 import com.example.justdriveq.app.questionnaire.viewmodel.ResultsViewModel;
 import com.example.justdriveq.models.Question;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -48,6 +49,7 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
     private int currentQuestionNumber;
     private String currentQuestionAnswer;
     private int correctAnswerCount = 0;
+    private List<Integer> alreadyGeneratedNumbers = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -179,8 +181,14 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
         int range = 39; // 40 de intrebari in firebase
 
         Random random = new Random();
+        int newNumber = random.nextInt(range);
 
-        return random.nextInt(range) + 1;
+        while (alreadyGeneratedNumbers.contains(newNumber)){
+            newNumber = random.nextInt(range);
+        }
+        alreadyGeneratedNumbers.add(newNumber);
+
+        return newNumber + 1;
     }
 
     @Override
