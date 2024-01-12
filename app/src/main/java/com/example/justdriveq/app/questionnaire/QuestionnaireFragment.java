@@ -47,6 +47,8 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
     private Button selectedButtonToCurrentQuestion;
     private TextView questionNumber;
     private TextView questionText;
+    private TextView correctAnswersText;
+    private TextView wrongAnswersText;
     private boolean ansSelected = FALSE;
     private int currentQuestionNumber;
     private String currentQuestionAnswer;
@@ -76,6 +78,13 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
         confirmAnswer = view.findViewById(R.id.ConfirmAnswerButton);
         questionNumber = view.findViewById(R.id.questionNumber);
         questionText = view.findViewById(R.id.questionText);
+        correctAnswersText = view.findViewById(R.id.correctAnswerText);
+        wrongAnswersText = view.findViewById(R.id.wrongAnswerText);
+
+        String initMessageForCorrectAnswerText = "Correct answers: 0";
+        String initMessageForWrongAnswerText = "Wrong answers: 0";
+        correctAnswersText.setText(initMessageForCorrectAnswerText);
+        wrongAnswersText.setText(initMessageForWrongAnswerText);
 
         questionnaireViewModel.loadQuestionsFromFirebase();
         this.currentQuestionNumber = 1;
@@ -151,6 +160,8 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
         thirdOptionButton.setEnabled(TRUE);
         forthOptionButton.setEnabled(TRUE);
 
+        correctAnswersText.setVisibility(View.VISIBLE);
+        wrongAnswersText.setVisibility(View.VISIBLE);
         confirmAnswer.setVisibility(View.VISIBLE);
         nextQuestionButton.setVisibility(View.VISIBLE);
         confirmAnswer.setEnabled(FALSE);
@@ -159,6 +170,10 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
 
     private void selectThisButton(Button button){
         if(ansSelected == FALSE){
+            firstOptionButton.setEnabled(FALSE);
+            secondOptionButton.setEnabled(FALSE);
+            thirdOptionButton.setEnabled(FALSE);
+            forthOptionButton.setEnabled(FALSE);
             button.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.darkblue));
             selectedButtonToCurrentQuestion = button;
             confirmAnswer.setEnabled(TRUE);
@@ -166,9 +181,12 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
         }
     }
     private void verifySelectedButton(Button button){
+        confirmAnswer.setEnabled(FALSE);
         if(currentQuestionAnswer.equals(button.getText())){
             button.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.darkgreen));
             correctAnswerCount++;
+            String correctAnswerMessage = "Correct answers: " + correctAnswerCount;
+            correctAnswersText.setText(correctAnswerMessage);
         } else {
             button.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.darkred));
             if(currentQuestionAnswer.equals(firstOptionButton.getText())){
@@ -184,6 +202,8 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
                 firstOptionButton.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.darkgreen));
             }
             wrongAnswerCount++;
+            String wrongAnswerMessage = "Wrong answers: " + wrongAnswerCount;
+            wrongAnswersText.setText(wrongAnswerMessage);
         }
         nextQuestionButton.setEnabled(TRUE);
     }
@@ -241,7 +261,7 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
             ansSelected = FALSE;
         }
         else if(currentButtonId == R.id.nextQuestionButton){
-            if(wrongAnswerCount > 27){
+            if(wrongAnswerCount > 4){
                 List<Integer> counter = new ArrayList<>();
                 counter.add(correctAnswerCount);
                 counter.add(wrongAnswerCount);

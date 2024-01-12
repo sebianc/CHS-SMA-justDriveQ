@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.justdriveq.R;
 import com.example.justdriveq.data.firebase.viewmodel.AuthViewModel;
@@ -27,6 +28,7 @@ public class HomeFragment extends Fragment {
     private Button questionnaireButton;
     private Button howtoButton;
     private Button leaderboardButton;
+    private TextView homeMessage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +47,11 @@ public class HomeFragment extends Fragment {
         howtoButton = view.findViewById(R.id.howToPlayButton);
         leaderboardButton = view.findViewById(R.id.viewLeaderboardButton);
         questionnaireButton = view.findViewById(R.id.startQuestionnaireButton);
+        homeMessage = view.findViewById(R.id.helloMessage);
 
+        String[] emailWithoutDotCom = authViewModel.getUser().getEmail().split("@");
+        String messageForWelcome = "Hello, " + emailWithoutDotCom[0];
+        homeMessage.setText(messageForWelcome);
         //actiune de logout
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override

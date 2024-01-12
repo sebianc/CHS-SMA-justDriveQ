@@ -66,7 +66,7 @@ public class ResultsFragment extends Fragment {
             @Override
             public void onChanged(List<Integer> integers) {
                 String resultString;
-                if(integers.get(0) > 24){
+                if(integers.get(0) > 22){
                     resultString = "You passed";
                     Result result = new Result(authViewModel.getUser().getEmail(), true);
                     resultsViewModelLeaderboard.addResultToFirebase(result);
