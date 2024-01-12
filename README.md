@@ -1,0 +1,1 @@
+in order to have a better experience while playing with this project, go into the QuestionnaireFragment.java class -> to the last function and change from if(wrongAnswersCount > 4) to if(wrongAnswersCount > 27). if you do this you will be able to complete a whole questionnaire even if u were supposed to fail it(meaning u got more than 4 questions wrong)
