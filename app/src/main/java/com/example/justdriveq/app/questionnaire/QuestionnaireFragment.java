@@ -43,6 +43,8 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
     private Button thirdOptionButton;
     private Button forthOptionButton;
     private Button nextQuestionButton;
+    private Button confirmAnswer;
+    private Button selectedButtonToCurrentQuestion;
     private TextView questionNumber;
     private TextView questionText;
     private boolean ansSelected = FALSE;
@@ -51,6 +53,7 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
     private int correctAnswerCount = 0;
     private int wrongAnswerCount = 0;
     private List<Integer> alreadyGeneratedNumbers = new ArrayList<>();
+    private List<Question> allQuestions;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -70,6 +73,7 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
         thirdOptionButton = view.findViewById(R.id.thirdOptionButton);
         forthOptionButton = view.findViewById(R.id.forthOptionButton);
         nextQuestionButton = view.findViewById(R.id.nextQuestionButton);
+        confirmAnswer = view.findViewById(R.id.ConfirmAnswerButton);
         questionNumber = view.findViewById(R.id.questionNumber);
         questionText = view.findViewById(R.id.questionText);
 
@@ -88,6 +92,7 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
         secondOptionButton.setOnClickListener(this);
         thirdOptionButton.setOnClickListener(this);
         forthOptionButton.setOnClickListener(this);
+        confirmAnswer.setOnClickListener(this);
         nextQuestionButton.setOnClickListener(this);
 
         loadData();
@@ -126,7 +131,6 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
                 thirdOptionButton.setText(questions.get(i-1).getOption_c());
                 forthOptionButton.setText(questions.get(i-1).getOption_d());
                 currentQuestionAnswer = questions.get(i-1).getAnswer();
-
                 showAnswerButtons();
             }
         });
@@ -147,23 +151,41 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
         thirdOptionButton.setEnabled(TRUE);
         forthOptionButton.setEnabled(TRUE);
 
+        confirmAnswer.setVisibility(View.VISIBLE);
         nextQuestionButton.setVisibility(View.VISIBLE);
+        confirmAnswer.setEnabled(FALSE);
         nextQuestionButton.setEnabled(FALSE);
     }
 
-    private void verifyAnswer(Button button){
+    private void selectThisButton(Button button){
         if(ansSelected == FALSE){
-            if(currentQuestionAnswer.equals(button.getText())){
-                button.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.darkgreen));
-                correctAnswerCount++;
-            } else {
-                button.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.darkred));
-                wrongAnswerCount++;
-            }
+            button.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.darkblue));
+            selectedButtonToCurrentQuestion = button;
+            confirmAnswer.setEnabled(TRUE);
             ansSelected = TRUE;
-            nextQuestionButton.setEnabled(TRUE);
         }
-
+    }
+    private void verifySelectedButton(Button button){
+        if(currentQuestionAnswer.equals(button.getText())){
+            button.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.darkgreen));
+            correctAnswerCount++;
+        } else {
+            button.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.darkred));
+            if(currentQuestionAnswer.equals(firstOptionButton.getText())){
+                firstOptionButton.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.darkgreen));
+            }
+            if(currentQuestionAnswer.equals(secondOptionButton.getText())){
+                firstOptionButton.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.darkgreen));
+            }
+            if(currentQuestionAnswer.equals(thirdOptionButton.getText())){
+                firstOptionButton.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.darkgreen));
+            }
+            if(currentQuestionAnswer.equals(forthOptionButton.getText())){
+                firstOptionButton.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.darkgreen));
+            }
+            wrongAnswerCount++;
+        }
+        nextQuestionButton.setEnabled(TRUE);
     }
     private void switchToLastQuestionButton(){
         List<Integer> counter = new ArrayList<>();
@@ -173,6 +195,8 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
         navController.navigate(R.id.action_questionnaireFragment_to_resultsFragment);
     }
     private void generateNewAnswers(){
+        confirmAnswer.setVisibility(View.VISIBLE);
+        confirmAnswer.setEnabled(FALSE);
         nextQuestionButton.setVisibility(View.VISIBLE);
         nextQuestionButton.setEnabled(FALSE);
 
@@ -201,19 +225,23 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
         int currentButtonId = v.getId();
 
         if(currentButtonId == R.id.firstOptionButton){
-            verifyAnswer(firstOptionButton);
+            selectThisButton(firstOptionButton);
         }
         else if(currentButtonId == R.id.secondOptionButton){
-            verifyAnswer(secondOptionButton);
+            selectThisButton(secondOptionButton);
         }
         else if(currentButtonId == R.id.thirdOptionButton){
-            verifyAnswer(thirdOptionButton);
+            selectThisButton(thirdOptionButton);
         }
         else if(currentButtonId == R.id.forthOptionButton){
-            verifyAnswer(forthOptionButton);
+            selectThisButton(forthOptionButton);
+        }
+        else if(currentButtonId == R.id.ConfirmAnswerButton){
+            verifySelectedButton(selectedButtonToCurrentQuestion);
+            ansSelected = FALSE;
         }
         else if(currentButtonId == R.id.nextQuestionButton){
-            if(wrongAnswerCount > 4){
+            if(wrongAnswerCount > 27){
                 List<Integer> counter = new ArrayList<>();
                 counter.add(correctAnswerCount);
                 counter.add(wrongAnswerCount);
@@ -224,7 +252,6 @@ public class QuestionnaireFragment extends Fragment implements View.OnClickListe
                 switchToLastQuestionButton();
             } else if(currentQuestionNumber < 26){
                 currentQuestionNumber++;
-                ansSelected = FALSE;
                 loadQuestionInQuestionnaire(generateNewQuestionNumber());
                 generateNewAnswers();
             }
